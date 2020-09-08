@@ -1,0 +1,49 @@
+{string $obj[]; string $WhiteKeys[]; string $BlackKeys[];
+for ($i = 0; $i<7; ++$i)
+{
+	$obj = `polyCube`;
+	scale  -r 4 1 .98 $obj;
+	move -r 0 0 (0-$i) $obj;
+	rename ("WhiteKey_" + $i);
+	$WhiteKeys [size($WhiteKeys)] = $obj[0];
+}
+
+for ($i = 0; $i<6; ++$i)
+{
+	$obj = `polyCube`;
+	scale  -r 2 .7 .5 $obj;
+	move -r -1 .5 (-.5 -$i) $obj;
+	rename ("BlackKey_" + $i);
+	$BlackKeys [size($BlackKeys)] = $obj[0];
+}
+select -r BlackKey_2;
+delete;
+select -r BlackKey_1 BlackKey_3 BlackKey_4 BlackKey_5 BlackKey_0 WhiteKey_6 WhiteKey_5 WhiteKey_4 WhiteKey_3 WhiteKey_0 WhiteKey_1 WhiteKey_2 ;
+polyUnite;
+rename "PianoKeys";
+DeleteHistory;
+
+{
+polyCube;
+rename "PianoBody";
+scale 5 1 1;
+select -r PianoBody.f[0] ; move -z 1 ;
+select -r PianoBody.f[2] ; move -z -7 ;
+select -r PianoBody.f[1] ;
+polyExtrudeFacet;
+scale -r -p 0cm 0.5cm -3cm 0.9 0.9 0.9 ;
+polyExtrudeFacet;
+move -r 0 -0.06 0 ;
+select -r PianoBody.f[6] PianoBody.f[7] PianoBody.f[8] PianoBody.f[9];
+polyBevel -fraction .5 -offsetAsFraction 2 -autoFit 1;
+select PianoKeys PianoBody;
+Group;
+select group1;
+rename group1 "Geometry";
+select PianoKeys PianoBody;
+parent;
+select Geometry;
+FreezeTransformations;
+}
+}
+
