@@ -1,0 +1,57 @@
+{
+proc float AddNums()
+{
+	float $num1 = 2;
+	float $num2 = 5;
+	float $num3 = 3;
+	float $sum = $num1 + $num2 + $num3;
+	
+	print ($sum);
+	return $sum;
+
+}
+}
+
+{
+proc float SubNums()
+{
+	float $num1 = 5;
+	float $num2 = 3;
+	float $num3 = 1;
+	float $dif = $num1 - $num2 - $num3;
+	
+	print ($dif);
+	return $dif;
+}
+}
+
+MultNums();
+
+{
+proc float MultNums()
+{
+	float $num1 = 5;
+	float $num2 = 4;
+	float $num3 = 2;
+	float $prod = $num1 * $num2 * $num3;
+	
+	print ($prod);
+	return $prod;
+}
+}
+
+MultNums();
+
+{
+proc float DivNums()
+{
+	float $num1 = 21;
+	float $num2 = 3;
+	float $quo = $num1 / $num2;
+	
+	print ($quo);
+	return $quo;
+}
+}
+
+DivNums();
