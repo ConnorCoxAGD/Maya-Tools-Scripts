@@ -1,111 +1,194 @@
 global proc Calculator(string $operation, float $numbers[])
 {
+	float $solution[];
+	
 	switch ($operation)
-	{
+	{	
+	
 		case "add":
-			print (AddNums($numbers));
-			print ("\n");		
-			return AddNums($numbers);
+		
+			$solution = AddNums($numbers);
+			print $solution;
+			return;
+		
 				break;
-	}
+			
+		case "subtract":
+		
+			$solution = SubNums($numbers);
+			print $solution;
+			return;
+			
+				break;
+				
+		case "multiply":
+		
+			$solution = MultiNums($numbers);
+			print $solution;
+			return;
+			
+				break;
+		
+		case "divide":
+		
+			$solution = DivNums($numbers);
+			print $solution;
+			return;
+			
+				break;
+			
+		case "power":
+		
+			$solution = PowerNums($numbers);
+			print $solution;
+			return;
+			
+				break;
+		
+		case "mean":
+		
+			$solution = Mean($numbers);
+			print $solution;
+			return;
+			
+				break;
+		
+		case "median":
+		
+			$solution = Median($numbers);
+			print $solution;
+			return;
+			
+				break;
+				
+		case "mode":
+		
+			$solution = Mode($numbers);
+			print $solution;
+			return;
+			
+				break;
+    }
+	
 }
 
-global proc float AddNums(float $nums[])
+global proc float[] AddNums(float $nums[])
 {
-	float $sum = 0;
-	for($i = 0; $i < (size($nums)); $i++)
-	{
-		$sum += $nums[$i];
-	}
-	return$sum;
+	float $sum[] = {0};
+		for($i = 0; $i < (size($nums)); $i++)
+		{
+			$sum[0] += $nums[$i];
+		}
+	return $sum;
 }
 
-global proc float SubNums(float $nums[])
+global proc float[] SubNums(float $nums[])
 {
 	float $firstNum = $nums[0];
+	float $dif[] = {0};
 	for($i = 1; $i < (size($nums)); $i++)
 	{
 		$firstNum -= $nums[$i];
 	}
-	float $dif = $firstNum;
-	print($dif);
+	$dif[0] = $firstNum;
 	return($dif);
 }
 
 
-global proc float MultiNums(float $nums[])
+global proc float[] MultiNums(float $nums[])
 {
 
-	float $prod = 1;
+	float $prod[] = {1};
 	for($i = 0; $i < (size($nums)); $i++)
 	{
-		$prod *= $nums[$i];
+		$prod[0] *= $nums[$i];
 	}
-	
-	print ($prod);
 	return ($prod);
 }
 
-global proc float DivNums(float $nums[])
+global proc float[] DivNums(float $nums[])
 {
 	float $firstNum = $nums[0];
+	float $quo[] = {1};
 	for($i = 1; $i < (size($nums)); $i++)
 	{
-		$firstNum -= $nums[$i];
+		$firstNum /= $nums[$i];
 	}
-	float $quo = $firstNum;
-	print($quo);
+	$quo[0] = $firstNum;
 	return($quo);
 }
 
 
-global proc float PowerNums(float $baseNum, float $exp)
+global proc float[] PowerNums(float $nums[])
 {
+	float $baseNum = $nums[0];
+	float $exp = $nums[1];
 	float $power = $baseNum;
+	float $answer[] = {0};
 	for($i = 0; $i< ($exp -1); $i++)
 	{
 		$power = $power * $baseNum;
 	}
-	print($power);
-	return ($power);
+	$answer[0] = $power;
+	return ($answer);
 }
 
-global proc float Mean(float $nums[])
+global proc float[] Mean(float $nums[])
 {
 	float $sum = 0;
+	float $mean[] = {0};
 	for($i = 0; $i< (size($nums)); $i++)
 	{
 		$sum += $nums[$i];
 	}
-	$mean = $sum / (size($nums));
-	print($mean);
+	$mean[0] = $sum / (size($nums));
 	return ($mean);
 }
 
-global proc float Median(float $nums[])
+global proc float[] Median(float $nums[])
 {
-	float $median;
-	float $list = (size($nums))+1;
+	float $sortedNums[] = `sort $nums`;
+	float $median[] = {0};
+	float $list = (size($sortedNums))+1;
 	if($list %2 != 0)
 	{
 		int $lesser = floor($list/2)-1;
 		int $greater = ceil($list/2)-1;
-		float $total = $nums[$lesser]+$nums[$greater];
-		$median = $total/2;
+		float $total = $sortedNums[$lesser]+$sortedNums[$greater];
+		$median[0] = $total/2;
 	}
 	if($list %2 == 0)
 	{
 		int $middle = ($list/2)-1;
-		$median = $nums[$middle];
+		$median[0] = $sortedNums[$middle];
 	}
-	
-	print($median);
 	return ($median);
 }
 
 global proc float Mode(float $nums[])
 {
+	float $sortedNums[] = `sort $nums`;
+	float $thisNum = $sortedNums[0];
 	
+	float $mode[] = {0};
+	
+	int $frequency;
+	int $mostFrequent;
+	
+		for($i = 0; $i < size($sortedNums); $i++)
+		{
+			if($sortedNums[$i] == $thisNum)
+				$frequency++;
+			else
+			{
+				if($frequency > $mostFrequent)
+				{
+					$mostFrequent = $frequency;
+				}
+				$frequency = 1;
+				$thisNum = $sortedNums[$i];
+			}
+		}
 }
 
 
