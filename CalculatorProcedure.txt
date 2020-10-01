@@ -165,7 +165,7 @@ global proc float[] Median(float $nums[])
 	return ($median);
 }
 
-global proc float Mode(float $nums[])
+global proc float[] Mode(float $nums[])
 {
 	float $sortedNums[] = `sort $nums`;
 	float $thisNum = $sortedNums[0];
@@ -184,11 +184,14 @@ global proc float Mode(float $nums[])
 				if($frequency > $mostFrequent)
 				{
 					$mostFrequent = $frequency;
+					$mode[0] = $thisNum;
 				}
 				$frequency = 1;
 				$thisNum = $sortedNums[$i];
 			}
 		}
+	
+	return ($mode);
 }
 
 

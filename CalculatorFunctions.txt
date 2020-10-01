@@ -113,9 +113,33 @@ Median({2,4,5,7,8,10,13,14});
 }
 
 {
-proc float Mode(float $nums[])
+proc float[] Mode(float $nums[])
 {
+	float $sortedNums[] = `sort $nums`;
+	float $thisNum = $sortedNums[0];
 	
+	float $mode[] = {0};
+	
+	int $frequency;
+	int $mostFrequent;
+	
+		for($i = 0; $i < size($sortedNums); $i++)
+		{
+			if($sortedNums[$i] == $thisNum)
+				$frequency++;
+			else
+			{
+				if($frequency > $mostFrequent)
+				{
+					$mostFrequent = $frequency;
+					$mode[0] = $thisNum;
+				}
+				$frequency = 1;
+				$thisNum = $sortedNums[$i];
+			}
+		}
+	
+	return ($mode);
 }
 }
 
