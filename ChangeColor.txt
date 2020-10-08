@@ -1,0 +1,43 @@
+proc ChangeColor(string $color)
+{
+	string $controls[] = `ls -sl`;
+	int $colorInt;
+	
+	switch ($color)
+	{
+		case "blue":
+		$colorInt = 6;
+			break;
+			
+		case "pink":
+		$colorInt = 9;
+			break;
+		
+		case "red":
+		$colorInt = 13;
+			break;
+		
+		case "green":
+		$colorInt = 14;
+			break;
+		
+		case "red":
+		$colorInt = 13;
+			break;
+		
+		case "yellow":
+		$colorInt = 17;
+			break;
+	}
+	
+	for($i in $controls)
+	{
+		string $curves[] = `listRelatives -children -shapes $controls[$i]`;
+		
+		for($j = 0; $j < (size($curves)); $j++)
+		{
+			setAttr ($curves[$j] + ".overrideEnabled") 1;
+			setAttr ($curves[$j]+ ".overrideColor") $colorInt;
+		}
+	}
+}
