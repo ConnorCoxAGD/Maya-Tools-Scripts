@@ -1,0 +1,15 @@
+proc RandomPlacement(int $dupAmount, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+	string $obj[] = `ls -sl`;
+
+	for ($i=0; $i < $dupAmount; $i++)
+		{
+			$obj = `duplicate $obj`;
+			float $randX = `rand $minX $maxX`;
+			float $randY = `rand $minY $maxY`;
+			float $randZ = `rand $minZ $maxZ`;
+			xform -ws -t $randX $randY $randZ;
+		}
+}
+
+RandomPlacement(10, 1, 10, 0, 1, 1, 10);
