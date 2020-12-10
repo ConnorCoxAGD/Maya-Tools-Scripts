@@ -10,12 +10,8 @@ class ToolboxUI:
         # deletes window if it already is in use
         self.delete()
 
-        self.toolbox_window = cmds.window(self.toolbox_window,
-                                         title="Toolbox",
-                                         widthHeight=(200, 200))
-
-        self.col_layout = cmds.columnLayout(parent=self.toolbox_window,
-                                            adjustableColumn=True)
+        self.toolbox_window = cmds.window(self.toolbox_window, title="Toolbox", widthHeight=(200, 200))
+        self.col_layout = cmds.columnLayout(parent=self.toolbox_window, adjustableColumn=True)
 
         cmds.button(parent=self.col_layout, label='RenameTool', c=lambda *x: self.call_renameUI())
         cmds.button(parent=self.col_layout, label='Random Distributor', c=lambda *x: self.call_random_generatorUI())
