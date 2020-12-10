@@ -12,7 +12,6 @@ class RenameObjectTool:
 
         self.col_layout = cmds.columnLayout(parent=self.rename_window, adjustableColumn=True)
         self.name_field = cmds.textField(parent=self.col_layout, placeholderText="Ex. Name_##_Geo")
-        self.written_name = cmds.text(self.name_field, q=True, text=True)
 
         cmds.button(parent=self.col_layout, label='RenameTool', c=lambda *x: self.rename_selected())
 
@@ -24,15 +23,15 @@ class RenameObjectTool:
 
     def rename_selected(self):
         selected = cmds.ls(sl=True)
-        object_name = self.written_name
+        self.written_name = cmds.textField(self.name_field, q=True, text=True)
         print self.written_name
-        padding_amount = object_name.count("#")
+        padding_amount = self.written_name.count("#")
 
         current_number = 0
 
         for o in selected:
             current_number = current_number + 1
-            txt = object_name.replace("#" * padding_amount, str(current_number).zfill(padding_amount))
+            txt = self.written_name.replace("#" * padding_amount, str(current_number).zfill(padding_amount))
             cmds.rename([o], txt)
 
 
